@@ -80,7 +80,7 @@ Verbindung mit dem Mikrocontroller:
 | Pin name | Teensy |
 | -------- | ------ |
 | VCC      | 3V3    |
-| DATA     | 20     |
+| DATA     | 7      |
 | GND      | GND    |
 
 ### Münzeinwurf
@@ -102,8 +102,32 @@ Verbindung mit dem Mikrocontroller:
 | Pin name | Teensy |
 | -------- | ------ |
 | 3V3      | 3V3    |
-| DATA     | 19     |
+| DATA     | 8      |
 | GND      | GND    |
+
+### Display
+
+Beim Display handelt es sich um ein schwarz-weißes 1,3" SH1106 128x64 Pixel I2C OLED Display.
+
+| Pin name | Teensy |
+| -------- | ------ |
+| 3V3      | 3V3    |
+| GND      | GND    |
+| SDA      | 18     |
+| SDL      | 19     |
+
+Der QR-Code wird folgendermaßen vorproduziert:
+
+1. Einen Redeem-Token im Hub-Backoffice anlegen.
+2. Die URL auf z.B. [is.gd](https://is.gd/) kürzen.
+3. Einen QR-Code mit [qrcode](https://www.npmjs.com/package/qrcode) erstellen: `npx qrcode -q 1 -o ~/qr-redeem.png https://is.gd/xxxxxx`. Durch die Einstellungen sollte eine 54x54 Pixel große Grafik erstellt werden.
+4. Den QR-Code mit [image2cpp](https://javl.github.io/image2cpp/) in ein Byte-Array umwandeln. Einstellungen:
+   - Canvas Size: 128x64
+   - Background Color: Black
+   - Center image: horizontally, vertically
+   - Swap bits in byte: swap
+   - Alles weitere auf Standard—Einstellungen belassen.
+5. Das Byte-Array in der main.cpp ersetzen.
 
 ## Software
 
