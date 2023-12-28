@@ -122,7 +122,7 @@ void loop()
 
   // ACTUAL GLYCKSMELODIE AUTOMATON
 
-  if (currentState != State::Idle && millis() - lastInteraction >= 30000)
+  if (currentState != State::Idle && millis() - lastInteraction >= 15000)
   {
     // Resign after 30 seconds without interaction
     setState(State::Idle);
@@ -145,7 +145,7 @@ void loop()
   case State::InsertCoin:
   {
     // Make sure there is a motion
-    if (!movement_active)
+    if (!movement_active && millis() - lastInteraction >= 30000)
     {
       Serial.println("InsertCoin: no more motion");
       setState(State::Idle);
