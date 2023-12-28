@@ -18,7 +18,7 @@ enum State
 
 State previousState = State::Idle;
 State currentState = State::Idle;
-int lastInteraction = 0;
+unsigned long lastInteraction = 0;
 int pressedKeys = 0;
 
 const char KEY_YES = '#';
